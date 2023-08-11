@@ -15,10 +15,10 @@ sig_type = 6;
 
 
 %% load the recving data to process in reply side
-raw_folder = '../../../Range_data/block/';
+raw_folder = '../../../block/';
 save_fig = 1;
 exp_num = 1;
-listings = dir(strcat('../../../Range_data/block/', int2str(exp_num), '/')) ;
+listings = dir(strcat(raw_folder, int2str(exp_num), '/')) ;
 
 group_users = [];
 roles = [];
@@ -54,6 +54,7 @@ DIS_gt = zeros(group_size);
 
 %% Load the raw sending signals from the raw folder
 % Raw dataset 
+
 PN_seq = [1, 1, -1, 1];
 L = length(PN_seq);
 Ns = 1920; %720
@@ -75,7 +76,7 @@ for i =0:5
     train_idx(:, i+1) = dlmread(strcat('multi_users_FSK3/',save_file,'/FSK_IDX.txt')); % this is the FSK codes to decode the user id of each packets.
 end
 
-color_lists = [	"r", "g", 	"b", "c", "m", "y", "k" ];
+color_lists = [	'r', 'g', 	'b', 'c', 'm', 'y', 'k' ];
 
 extracted_index = zeros(group_size, 20, group_size);
 valid_meas = ones(20, 1);
@@ -96,12 +97,12 @@ DIS_gt
 for r =1:(group_size)
     USER_ID = group_users(r);
     role = roles(r, :);
-    exp = " ";
+    exp = ' ';
     folders = strcat(raw_folder, int2str(exp_num), '/', role, '/');
     filenames = dir(folders);
     for j = 1:size(filenames, 1)
         name = filenames(j).name;
-        if contains(name, "16")
+        if contains(name, '16')
             exp = name;
             break;
         end
@@ -112,7 +113,7 @@ for r =1:(group_size)
     rx_signal2 = dlmread(strcat(folders, exp, '/', exp, '-',file_id,'-top.txt'))/10000; % top mic channel 
 
     %%% the beginning 32s of leader during experiment is sleeping
-    if role ~= "L0"
+    if role ~= 'L0'
         rx_signal = rx_signal(32*fs+1:end);
         rx_signal2 = rx_signal2(32*fs+1:end); 
     end
@@ -125,18 +126,20 @@ for r =1:(group_size)
     hold on
     plot(rx_signal)
     plot(rx_signal2, '--')
-    for i = 1:size(fine_result, 1)
-        for j = 1:size(fine_result, 2)
-            xline(fine_result(i, j)+270,  '--', "Color",color_lists(j))
-        end
-    end
+%     for i = 1:size(fine_result, 1)
+%         for j = 1:size(fine_result, 2)
+%             xline(fine_result(i, j)+270,  '--', 'Color',color_lists(j))
+%         end
+%     end
     title('reply side synchronization')
 
 
-
+    % matching the pairwise ranging between different phones, this is only
+    % needed for offline, for online it does not match
     T = size(fine_result, 1);
     for t = 1:T
-        if min(fine_result(t, :), [], 'all') < 0
+%         if min(fine_result(t, :), [], 'all') < 0
+        if min(fine_result(t, :)) < 0
 %                 fine_result(t, :)
             valid_meas(t, 1) = 0;
         end
@@ -148,7 +151,6 @@ for r =1:(group_size)
 
 end
 
-T_min
 %%%%%% process the distance matrix
 for i = 1:T_min
     if valid_meas(i, 1) == 0
@@ -167,7 +169,7 @@ for i = 1:T_min
     if min(dis_matrix, [], 'all') >= 0 
         dis_matrix
 %         dis_matrix - DIS_gt
-        dlmwrite(strcat(raw_folder, int2str(exp_num), '/result', int2str(i), '.txt'), dis_matrix );
+%         dlmwrite(strcat(raw_folder, int2str(exp_num), '/result', int2str(i), '.txt'), dis_matrix );
     end
     
 end

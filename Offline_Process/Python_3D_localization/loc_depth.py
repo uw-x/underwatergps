@@ -117,9 +117,9 @@ def plot_cdf(data:list, labels: list):
     # ax.set_xlim([0, 3])
 
 if __name__ == "__main__":
-    exp_folder = "../Range_data/block/"
-    motion_id = 1
+    exp_folder = "../../../block/"
     gt = np.loadtxt(exp_folder + 'gt.txt', delimiter = ',')
+    # load the ground-truth of divers
     gt[:, 0:2] = gt[:, 0:2] - gt[0, 0:2]  
     num_users = gt.shape[0]
     dis_gt = calculate_dis_matrix(gt)
@@ -131,25 +131,19 @@ if __name__ == "__main__":
     err_motion = [[], [],  [],  [] , [] ]
     err_dis = [[], [], [], []]
 
-    for exp_num in [ 1,2,3,5,6,7]:
-        num_meas = 11
+    for exp_num in [ 4, 1,2,3,5,6,7]:
         for f in os.listdir(exp_folder + str(exp_num)):
             if f.endswith(".txt"):
                 print(exp_num, f)
-                # if exp_num != 3 or f != "result7.txt":
-                #     continue
-                dis_matrix = np.loadtxt(exp_folder + str(exp_num) + '/' +  f, delimiter = ',')#, delimiter = ' ')
-                # print(dis_matrix)
-                
-                dis_matrix2 = np.zeros_like(dis_matrix)
+                dis_matrix = np.loadtxt(exp_folder + str(exp_num) + '/' +  f, delimiter = ',') # load the measurement pairwise distances
+                dis_matrix2 = np.zeros_like(dis_matrix) ### project the distances matrix into 2D plane
                 for a in range(0, num_users):
                     for b in range(a+1, num_users):
                         calib_dis = np.sqrt(dis_matrix[a, b]**2 - (gt[a, 2] - gt[b, 2] )**2 )
                         dis_matrix2[a, b] = calib_dis
                         dis_matrix2[b, a] = calib_dis
-                # print(dis_matrix2)
-                # pos, _ = mds(dis_matrix2)
-                pos = smacof_outlier_detect(dis_matrix2, False)
+                ### apply the smacof algorithm to recover the 2D topology based on pairwise ranging
+                pos = smacof_outlier_detect(dis_matrix2, True)
 
                 pos = pos - pos[0, :]
                 angle = -np.arctan2( pos[int(user_info[1]), 1] , pos[int(user_info[1]), 0])
@@ -169,11 +163,7 @@ if __name__ == "__main__":
                     pos2 = pos2_flip
 
                 pred_3d = np.concatenate([pos2, gt[:, 2:3]], axis = 1)
-                # print(pred_3d)
-                pred_dis = calculate_dis_matrix(pred_3d)
-                # print(pred_dis)
-                
-                
+                pred_dis = calculate_dis_matrix(pred_3d)                
                 ### determine the flipping 
 
                 # calculate the 1D and AOA error
@@ -209,150 +199,13 @@ if __name__ == "__main__":
 
                     err_2d.append(err)
                     tmp_2d.append(err)
- 
 
-                if np.amax(tmp_2d) > 8 or np.amax(tmp_AOA) > 25:
-                    print("Warning big error!!!!: ", np.amax(tmp_2d), np.amax(tmp_AOA))
-                    print(dis_matrix2)
-                    print(dis_matrix2 - dis_gt)
-
-                    # plt.figure()
-                    # for i in range(pos.shape[0]):
-                    #     plt.scatter(pos2[i, 0], pos2[i, 1])
-                    #     plt.scatter(gt[i, 0], gt[i, 1], color = "black",marker = 'x')
-                    #     plt.text(pos2[i, 0]+0.2, pos2[i, 1]+0.2, str(i))
-                    # plt.xlim([-25, 25])
-                    # plt.ylim([-25, 25])
-                    # plt.show()
-                # print("1d ERR", tmp_1d)
-                # print("SOS ERR", tmp_AOA)
-                # # print(range_errs)
-                # # print(AOA_err)
-    range_errs2 = [] 
-    AOA_err2 = []
-    err_2d2 = []
-
-    err_dis = [[], [], [], []]
-
-    for exp_num in [ 1,2,3,5,6,7]:
-        num_meas = 11
-
-        for f in os.listdir(exp_folder + str(exp_num)):
-            if f.endswith(".txt"):
-                print(exp_num, f)
-                # if exp_num !=2  or f != "result13.txt":
-                #     continue
-                dis_matrix = np.loadtxt(exp_folder + str(exp_num) + '/' +  f, delimiter = ',')#, delimiter = ' ')
-                # print(dis_matrix)
-                
-                dis_matrix2 = np.zeros_like(dis_matrix)
-                for a in range(0, num_users):
-                    for b in range(a+1, num_users):
-                        calib_dis = np.sqrt(dis_matrix[a, b]**2 - (gt[a, 2] - gt[b, 2] )**2 )
-                        dis_matrix2[a, b] = calib_dis
-                        dis_matrix2[b, a] = calib_dis
-                # print(dis_matrix2)
-                # pos, _ = mds(dis_matrix2)
-                pos = smacof_outlier_detect(dis_matrix2, True)
-
-                pos = pos - pos[0, :]
-                angle = -np.arctan2( pos[int(user_info[1]), 1] , pos[int(user_info[1]), 0])
-                R = np.array([
-                    [np.cos(angle), np.sin(-angle) ],
-                    [np.sin(angle), np.cos(-angle) ]
-                ])
-                pos2 = (R.dot(pos.T)).T
-                
-                pos2_flip = np.copy(pos2)
-                pos2_flip[:, 1] = pos2_flip[:, 1] * (-1)
-
-                err1 = np.mean(np.linalg.norm(pos2 - gt[:, :2], axis = 1))
-                err2 = np.mean(np.linalg.norm(pos2_flip - gt[:, :2], axis = 1))
-
-                if err2 < err1:
-                    pos2 = pos2_flip
-
-                pred_3d = np.concatenate([pos2, gt[:, 2:3]], axis = 1)
-                # print(pred_3d)
-                pred_dis = calculate_dis_matrix(pred_3d)
-                # print(pred_dis)
-
-                
-                ### determine the flipping 
-
-                # calculate the 1D and AOA error
-                tmp_1d = []
-                for a in range(0, num_users):
-                    for b in range(a+1, num_users):
-                        err_1d = np.abs(dis_gt[a, b] - pred_dis[a, b])
-                        range_errs2.append(err_1d)
-                        tmp_1d.append(err_1d)
-                tmp_AOA = []
-                for a in range(0, num_users):
-                    if a in user_info:
-                        continue
-                    AOA_gt = np.arctan2(gt[a, 1], gt[a, 0]) 
-                    AOA_pred  = np.arctan2(pred_3d[a, 1], pred_3d[a, 0]) 
-                    AOA_err2.append(np.rad2deg(np.abs(AOA_gt - AOA_pred))% 180)
-                    tmp_AOA.append(np.rad2deg(np.abs(AOA_gt - AOA_pred))% 180)
-                tmp_2d = []
-
-                for a in range(0, num_users):
-                    if a == 0:
-                        continue
-                    err = np.linalg.norm(gt[a, :2] -pred_3d[a, :2] )
-                    leader_dis = dis_gt[a, 0]#np.linalg.norm(gt[a, :3] - gt[0, :3])
-
-
-                    err_2d2.append(err)
-                    tmp_2d.append(err)
- 
-
-                if np.amax(tmp_2d) > 8 or np.amax(tmp_AOA) > 25:
-                    print("Warning big error!!!!: ", np.amax(tmp_2d), np.amax(tmp_AOA))
-                    print(dis_matrix2)
-                    print(dis_matrix2 - dis_gt)
-
-                    # plt.figure()
-                    # for i in range(pos.shape[0]):
-                    #     plt.scatter(pos2[i, 0], pos2[i, 1])
-                    #     plt.scatter(gt[i, 0], gt[i, 1], color = "black",marker = 'x')
-                    #     plt.text(pos2[i, 0]+0.2, pos2[i, 1]+0.2, str(i))
-                    # plt.xlim([-25, 25])
-                    # plt.ylim([-25, 25])
-                    # plt.show()
-
-top10_num = int(len(err_2d) * 0.1)
-err_top10 = np.argsort(-1*np.array(err_2d))
-top10_index = err_top10[0:top10_num]
-# plot_cdf(np.array(range_errs), '1d err')
-# plot_cdf([np.array(err_motion)], ['motion node err'])
-plot_cdf([np.array(err_2d2)], ['2d err'])
-plot_cdf([np.array(err_2d)[top10_index], np.array(err_2d2)[top10_index]], ['2d err', '2dd err with outliers detect'])
-
-
-
-np.save("result/block/err_overall.npy", np.array(err_2d))
-np.save("result/block/err_overall2.npy", np.array(err_2d2))
-np.save("result/block/err_worst_10_1.npy", np.array(err_2d)[top10_index])
-np.save("result/block/err_worst_10_2.npy", np.array(err_2d2)[top10_index])
-
-# plot_cdf([np.array(err_dis[0]), np.array(err_dis[1]), np.array(err_dis[2])], ['0-10m', '10-15', '15-25'])
-
-# np.save("result/config2/err_overall.npy", np.array(err_2d))
-# np.save("result/config2/err_0_8.npy", np.array(err_dis[0]))
-# np.save("result/config2/err_8_16.npy", np.array(err_dis[1]))
-# np.save("result/config2/err_8_25.npy", np.array(err_dis[2]))
-
-# plot_cdf([np.array(err_motion[0]), np.array(err_motion[1]), np.array(err_motion[2]), np.array(err_motion[3])], ['u0', 'u1', 'u2', 'u3'])
-
-# plot_cdf([ np.array(err_motion[2]), np.array(err_motion[3])], ['u2', 'u3'])
-# np.save("result/motion/err_motion2.npy", np.array(err_2d))
-# np.save("result/motion/err_motion2_u2.npy", np.array(err_motion[2]))
-# np.save("result/motion/err_motion2_u3.npy", np.array(err_motion[3]))
-
-plot_cdf([np.array(AOA_err)], ['aoA err'])
-# 
-# plot_cdf([np.array(AOA_err),np.array(AOA_err2) ], ['aoA err', 'aoA err with outliers detect'])
-# plot_cdf(np.array(AOA_err), 'AOA err')
-plt.show()
+                plt.figure()
+                for i in range(pos.shape[0]):
+                    plt.scatter(pos2[i, 0], pos2[i, 1])
+                    plt.scatter(gt[i, 0], gt[i, 1], color = "black",marker = 'x')
+                    plt.text(pos2[i, 0]+0.2, pos2[i, 1]+0.2, str(i))
+                plt.xlim([-25, 25])
+                plt.ylim([-25, 25])
+                plt.show()
+   

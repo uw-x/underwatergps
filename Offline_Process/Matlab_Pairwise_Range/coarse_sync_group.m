@@ -35,6 +35,7 @@ function [coarse_results] = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L,
     locs0(negative_index) =[];
     locs(negative_index) =[];
     
+    %%% plot the cross-correlation figures for
     figure
     hold on
     plot(acor1)
@@ -46,19 +47,18 @@ function [coarse_results] = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L,
     fs = 44100;
     interval = 0.36*fs; 
     reply_interval = 0.85 *fs;
-%     interval = 0.32*fs; 
-%     reply_interval = 0.6 *fs;
-    variance_sample = 2000;
-    sig_len = Ns2 + variance_sample*2;
+    sig_len = Ns2 + 2000*2;
         
     coarse_results = [];
+    
+    
+    %%% find the timing the sending sigals and the receiving signals of 
     offsets_all = [0, reply_interval];
+    offsets = [];
+    user_idx = -1;
     for i =3:12
         offsets_all = [offsets_all, reply_interval+(i-2)*interval];
     end
-    
-    offsets = [];
-    user_idx = -1;
     for u = 1:length(group_users)
         id = group_users(u);
         if(id == user_id)
@@ -79,27 +79,21 @@ function [coarse_results] = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L,
         for chirp_id = 1:group_size
             begin_indexes(chirp_id) = self_idx - offsets(user_idx) + offsets(chirp_id) - 800;
         end 
-
-
-        begin_id = begin_indexes(1);
-        figure
-        plot(rx_signal(begin_id+1:begin_id+48000*2));
-        %%%% leader's chirp
-
-        num = 0;
-        if(idx < 0)
-            if(save_fig)
-                f = figure('Name', int2str(100 + idx),'visible','off');
-            else
-                f = figure('Name', int2str(100 + idx),'visible','on');
-            end
+        
+        %%% begin_indexes is the begin index for each preamble including
+        %%% sending and recieving preamble
+        if(idx == 4)
+            f = figure('Name', int2str(100 + idx),'visible','on');
             clf(f);
         end
-
+        
+        %%% checking whether each preamble is valid using naiser correlation
         miss_leader = 0;
-
+        num = 0;
         for begin_id = begin_indexes
             num = num + 1;
+            
+            %%% chunk the preamble
             if(miss_leader == 0 || num == user_id + 1)
                 if begin_id + sig_len < length(rx_signal) && begin_id > 0
                     rx1 = rx_signal(begin_id+1:begin_id+sig_len);
@@ -112,8 +106,13 @@ function [coarse_results] = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L,
             else
                 rx1 = rx_signal(begin_id+1 - interval*5 :begin_id+sig_len- interval*5);
             end
-
-            [naiser_idx, peak, Mn] = naiser_corr3(rx1, Ns, GI, L, PN_seq);
+            
+            %%% apply the naiser on the current chunked preamble
+            [naiser_idx, peak, Mn] = naiser_corr3(rx1, Ns, GI, L, PN_seq); 
+            
+            
+            %%% apply the naiser on the current nearby preambles to see
+            %%% whether missing any other preambles
             if(user_id == 0)
                 if(naiser_idx < 0)
                     rx1 =  rx_signal(begin_id+1+interval*5:begin_id+sig_len+interval*5);
@@ -134,16 +133,15 @@ function [coarse_results] = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L,
                     now_offset =  begin_indexes(num);
                 end
             end
-
+            
+            
+            %%% now the preamble is valid and we use cross correlation to determine the coarse index 
             [acor_i, lag_i] = xcorr(rx1, train_sig2s(:, num));
-
             begin_id = floor(length(acor_i)/2);
             acor_i_seg = acor_i( begin_id + 1: end);
             if(naiser_idx > 0)
-                
                 [max_val, max_id] = max(acor_i_seg);
-                p_threshold =max_val*0.6; %0.65
-    
+                p_threshold =max_val*0.6; 
                 for j = seek_back : -1 : 0
                     l_new = max_id - j;
                     if (l_new <= 0)
@@ -157,15 +155,24 @@ function [coarse_results] = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L,
 
             end
             
-%             results_indexes(num) - begin_indexes(num)
-            if(idx < 4 )
+            %%% visulization
+            if(idx == 4 )
                 subplot(group_size, 3, 3*num - 2)
                 plot(rx1)
+                if(num == 1) 
+                    title('Time Domain signal'); 
+                end
                 subplot(group_size, 3, 3*num - 1)
                 plot(acor_i_seg)
-                xline(results_indexes(num) - begin_indexes(num) )
+                if(num == 1) 
+                    title('Cross-correlation'); 
+                end
+%                 xline(results_indexes(num) - begin_indexes(num) )
                 subplot(group_size, 3, 3*num)
                 plot(Mn)
+                if(num == 1) 
+                    title('Naiser Cross-correlation'); 
+                end
                 ylim([-0.3,1])
                 xlim([0, 600])
                 
@@ -173,9 +180,6 @@ function [coarse_results] = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L,
 
 
         end
-%         if(save_fig)
-%             saveas(f,strcat('results/coarse_', int2str(user_id) , '_', int2str(idx-1), '.jpg'));
-%         end
         coarse_results = [coarse_results; results_indexes];
        
     end

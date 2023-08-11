@@ -1,7 +1,7 @@
 function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_single(rx_signal,rx_signal2,train_sig1s, train_sig2s, fs, BW, Ns, GI, L, PN_seq, c, user_id, group_users, FSK_IDX, save_fig, N_FSK)
     d = 0.16; %% phone sieze 0.2
-%     group_size = length(group_users);
-%     position = [0, 0; d, 0];
+    tolerance = round(d/c*fs) + 3; 
+    % dual mic tolerance , 3 more extra samples is for merge of peak with multipath and potch distortion
     bias = 480;
     bias_shift = 240;
     tap_num= Ns; %Ns
@@ -33,11 +33,9 @@ function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_si
     coarse_result = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L, PN_seq, user_id, group_users, save_fig);
     fine_result = -1*ones(size(coarse_result));
 
-
-    global_idx = [];
-    tolerance = round(d/c*fs)+3; %4
-
+    
     for r = 1:size(coarse_result, 1)
+        % save the figure for the channel
         if (r < 9)
             if(save_fig)
                 f =  figure('Name', int2str(200 + r),'visible','off');
@@ -45,11 +43,14 @@ function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_si
                 f =  figure('Name', int2str(200 + r),'visible','on');
             end
             clf(f);
-            
         end
-        if min(coarse_result(r, :), [], 'all') < 0
+        %if min(coarse_result(r, :), [], 'all') < 0
+        % one preamble detect fail so does not go further
+        if min(coarse_result(r, :)) < 0
             continue
         end
+        
+        %% channel estimation for fine-grained TOA estimation
         for id = 1: size(coarse_result, 2)
             user_name = group_users(id);
             if coarse_result(r, id) < 0
@@ -62,38 +63,12 @@ function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_si
             corr_idx = coarse_result(r, id);
             Hs = [];
             Hs2 = [];
-%             if id > 2
-%                 top = rx_signal(corr_idx - (bias - bias_shift)+1:corr_idx+Ns2 -(bias - bias_shift));
-%                 bottom = rx_signal2(corr_idx - (bias - bias_shift)+1:corr_idx+Ns2 -(bias - bias_shift));
-%                 figure
-%                 hold on
-%                 plot(top)
-%                 plot(bottom, '--')
-%                 [acor, lag] = xcorr(bottom, top);
-%                 figure
-%                 plot(lag, acor)
-%                 xlim([-14, 14])
-%             end
-
+            
             rx2 = rx_signal(corr_idx - (bias - bias_shift)+1:corr_idx+Ns2 -(bias - bias_shift));
             rx3 = rx_signal2(corr_idx - (bias - bias_shift)+1:corr_idx+Ns2 -(bias - bias_shift));
-
-            user_sig = rx_signal(corr_idx + Ns2+1  + GI + 150 : corr_idx + Ns2+ N_FSK + GI+150);
-%             figure
-%             plot(rx_signal2(corr_idx - bias+1:corr_idx+Ns2 +tap_num + GI-bias));
-
-%             user_id0 = check_FSK(user_sig, FSK_IDX)-1;
-%             if(user_id0 ~= user_name)
-%                 [user_id0, user_name]
-%             end
-
-%             assert(user_id0 == id)
-%             user_id = check_DIFF(user_sig1, user_sig2, train_sig1, FSK_IDX);
-%             figure
-%             subplot(211)
-%             plot(rx2)
-%             subplot(212)
-%             plot(rx3)
+            
+            % each preamble contains 4 OFDM
+            % estimate the channel for 4 OFDM and average over OFDMs
             for i = 1: L
                 begin_idx = (i-1)*(Ns + GI)+GI+1;
                 end_idx = begin_idx -1 + tap_num ;
@@ -112,33 +87,19 @@ function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_si
             end
             H = mean(Hs, 2);
             H2 = mean(Hs2, 2);
-%             close all
-%             figure(300)
-%             hold on
-%             for t = 1:size(Hs,2)
-%                 
-%                 plot(real(ifft(Hs(:, t))))
-%             end
-
             h = ifft(H);
             h_top = ifft(H2);
             h_abs = abs(h);
             h_abs2 = abs(h_top);
-            h_real = real(h);
-            h_real2 = real(h_top);
-%             figure
-%             plot(h_abs)
-
             h_abs = h_abs/max(h_abs);
             h_abs2 = h_abs2/max(h_abs2);
-            h_real = h_real/max(h_real);
-            h_real2 = h_real2/max(h_real2);
-
             h_abs = [h_abs(end - bias_shift+1:end); h_abs(1:end - bias_shift)];
             h_abs2 = [h_abs2(end - bias_shift+1:end); h_abs2(1:end - bias_shift)];
-            h_real = [h_real(end - bias_shift+1:end); h_real(1:end - bias_shift)];
-            h_real2 = [h_real2(end - bias_shift+1:end); h_real2(1:end - bias_shift)];
-
+            
+            % h_abs and h_abs2 is the channel esitmation results 
+            % for self sending preamble using self_chirp_direct_path to detect
+            % path, for the recieved preamble using dual_mic_direct_path 
+       
             if user_name == user_id
                 [midx, midx_new] = self_chirp_direct_path(h_abs,h_abs2, tolerance, bias, user_id);
                 thesholds = [0, 0];
@@ -146,18 +107,16 @@ function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_si
                 [midx, midx_new, thesholds] = dual_mic_direct_path(h_abs,h_abs2, tolerance, bias, 1);
             end
 
-            %%%%% seek direcrt path
-           
+            %%%%% seek direcrt path visualization
             if (r < 9)
-                
                 subplot(size(coarse_result, 2),1, id)
                 hold on
                 plot(h_abs)
                 plot(h_abs2)
                 scatter(midx, h_abs(midx), 'rx')
                 scatter(midx_new, h_abs2(midx_new), 'ko')
-                yline(thesholds(1));
-                yline(thesholds(2), '--');
+%                 yline(thesholds(1));
+%                 yline(thesholds(2), '--');
                 legend('bottom mic', 'top mic')
 
             end

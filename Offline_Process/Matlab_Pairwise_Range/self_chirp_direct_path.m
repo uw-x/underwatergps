@@ -1,9 +1,6 @@
 function [midx, midx_new] = self_chirp_direct_path(h_abs,h_abs2, tolerance, bias, user_id)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here   
-    threshold = 0.35;
-    threshold2 = 0.35;
-    
     [h_peak,midx]=max(h_abs);
     [h_peak2,midx2]=max(h_abs2);
     if(user_id > 0)

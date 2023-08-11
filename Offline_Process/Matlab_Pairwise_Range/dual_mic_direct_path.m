@@ -2,11 +2,13 @@ function [midx, midx_new, thesholds, which_channel] = dual_mic_direct_path(h_abs
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here\
     if(noise_adapt == 0)
+        %% using fixed noise threshold
         threshold = 0.35;
         low_threshold = threshold - 0.02;
         threshold2 = threshold;
         low_threshold2 = threshold2 - 0.02;
     else
+        %% using adaptive noise threshold based on channel estimation
         noise_level1 = mean(abs(h_abs(end - 600:end - 100)));
         noise_level2 = mean(abs(h_abs2(end - 600:end - 100)));
         threshold =  max([0.3, noise_level1 + 0.2]);
@@ -29,12 +31,7 @@ function [midx, midx_new, thesholds, which_channel] = dual_mic_direct_path(h_abs
 
     [h_pks1,h_locs1]=findpeaks(h_seg,'MinPeakHeight',h_peak*threshold,'MinPeakDistance',2);
     [h_pks2,h_locs2]=findpeaks(h_seg2,'MinPeakHeight',h_peak*threshold2,'MinPeakDistance',2);
-%                 figure
-%                 hold on
-%                 plot(h_seg)
-%                 scatter(h_locs1, h_pks1);
-%                 plot(h_seg2)
-%                 scatter(h_locs2, h_pks2);
+
     midx_new = midx;
     which_channel = 1;
     if(isempty(h_locs2) || isempty(h_locs1))
@@ -68,7 +65,6 @@ function [midx, midx_new, thesholds, which_channel] = dual_mic_direct_path(h_abs
                 seg = h_seg2(begin_idx:end_idx);
                 
                 if(max(seg) > low_threshold2 && l1 > midx - bias - 500)
-%                 if( (max(seg) > low_threshold2 || h_seg(l1) > 0.81 ) && l1 > midx - bias - 500)
                     midx_new = l1;
                     which_channel = 1;
                     break;
@@ -89,7 +85,6 @@ function [midx, midx_new, thesholds, which_channel] = dual_mic_direct_path(h_abs
                 seg = h_seg(begin_idx:end_idx);
                 
                 if(max(seg) > low_threshold && l2 > midx - bias -500)
-%                 if( (max(seg) > low_threshold || h_seg2(l2) > 0.81 ) && l2 > midx - bias -500)
                     midx_new = l2;
                     which_channel = 2;
                     break;
