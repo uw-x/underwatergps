@@ -44,10 +44,10 @@ function [coarse_results] = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L,
     %% using naiser corr to exclude sparkle noise
     num_user = group_size - 1;
     fs = 44100;
-    interval = 0.36*fs; 
-    reply_interval = 0.85 *fs;
-%     interval = 0.32*fs; 
-%     reply_interval = 0.6 *fs;
+%     interval = 0.36*fs; 
+%     reply_interval = 0.85 *fs;
+    interval = 0.32*fs; 
+    reply_interval = 0.6 *fs;
     variance_sample = 2000;
     sig_len = Ns2 + variance_sample*2;
         

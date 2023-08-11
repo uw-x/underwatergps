@@ -1,8 +1,8 @@
 function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_single(rx_signal,rx_signal2,train_sig1s, train_sig2s, fs, BW, Ns, GI, L, PN_seq, c, user_id, group_users, FSK_IDX, save_fig, N_FSK)
-    d = 0.2;
-    group_size = length(group_users);
-    position = [0, 0; d, 0];
-    bias =480;
+    d = 0.16; %% phone sieze 0.2
+%     group_size = length(group_users);
+%     position = [0, 0; d, 0];
+    bias = 480;
     bias_shift = 240;
     tap_num= Ns; %Ns
     Ns2 = size(train_sig2s, 1);
@@ -14,8 +14,8 @@ function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_si
     f0 = (begin_i-1)*delta_f;
 
     %% band pass filter
+    % filter the raw signal
     if have_filter
-        %% begin to process
         filter_order = 256;
         wn = [(BW(1) - 100)/(fs/2), (BW(2) + 200)/(fs/2)];    
         b = fir1(filter_order, wn, 'bandpass');  
@@ -28,21 +28,8 @@ function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_si
         delay_fir = filter_order/2;
         rx_signal2 = y_after_fir(delay_fir+1:end);
     end
-
-%     figure
-%     plot(rx_signal)
-%      audiowrite('save.wav',rx_signal/max(abs(rx_signal)),44100);
-%     rx_signal = rx_signal(1877000+1 : 1877000+fs*6);
-%     [naiser_idx, peak, Mn] = naiser_corr3(rx_signal, Ns, GI, L, PN_seq);
-%     figure
-%     subplot(211)
-%     plot(rx_signal)
-%     subplot(212)
-%     hold on
-%     x = (1:length(Mn))*16;
-%     plot(x, Mn)
-%     ylim([-0.5,1])
-
+    
+    %% apply the cross-correlation and Naiser correlation (autpo-correlation) for coarse sync
     coarse_result = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L, PN_seq, user_id, group_users, save_fig);
     fine_result = -1*ones(size(coarse_result));
 
