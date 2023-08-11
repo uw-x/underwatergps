@@ -6,7 +6,7 @@ fs=44100;
     
 % PN_seq = [1    -1    -1    -1    -1    -1   1    -1];
 
-c = 1500;
+c = 1500; %% sound speed underwater
 
 
 BW = [1000, 5000];
@@ -15,7 +15,7 @@ sig_type = 6;
 
 
 %% load the recving data to process in reply side
-raw_folder = '../../../block/';
+raw_folder = '../data_example/';
 save_fig = 1;
 exp_num = 1;
 listings = dir(strcat(raw_folder, int2str(exp_num), '/')) ;
@@ -118,29 +118,27 @@ for r =1:(group_size)
         rx_signal2 = rx_signal2(32*fs+1:end); 
     end
    
-    
+    %% apply the coarse and fine-grained signal arrival detection 
     [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_single(rx_signal,rx_signal2,train_sig1s, train_sig2s, fs, BW, Ns, GI, L, PN_seq, c, USER_ID, group_users, train_idx, save_fig, N_FSK);
     
-
+    %% visualize the signal detection results
     figure
     hold on
     plot(rx_signal)
     plot(rx_signal2, '--')
-%     for i = 1:size(fine_result, 1)
-%         for j = 1:size(fine_result, 2)
-%             xline(fine_result(i, j)+270,  '--', 'Color',color_lists(j))
-%         end
-%     end
-    title('reply side synchronization')
+    for i = 1:size(fine_result, 1)
+        for j = 1:size(fine_result, 2)
+            xline(fine_result(i, j)+270,  '--', 'Color',color_lists(j))
+        end
+    end
+    title('signal detection synchronization')
 
 
     % matching the pairwise ranging between different phones, this is only
     % needed for offline, for online it does not match
     T = size(fine_result, 1);
     for t = 1:T
-%         if min(fine_result(t, :), [], 'all') < 0
-        if min(fine_result(t, :)) < 0
-%                 fine_result(t, :)
+        if min(fine_result(t, :), [], 'all') < 0
             valid_meas(t, 1) = 0;
         end
     end
@@ -168,8 +166,7 @@ for i = 1:T_min
     end
     if min(dis_matrix, [], 'all') >= 0 
         dis_matrix
-%         dis_matrix - DIS_gt
-%         dlmwrite(strcat(raw_folder, int2str(exp_num), '/result', int2str(i), '.txt'), dis_matrix );
+        dlmwrite(strcat(raw_folder, int2str(exp_num), '/result', int2str(i), '.txt'), dis_matrix );
     end
     
 end

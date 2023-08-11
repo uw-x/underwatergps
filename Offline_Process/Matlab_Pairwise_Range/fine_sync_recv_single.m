@@ -44,9 +44,8 @@ function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_si
             end
             clf(f);
         end
-        %if min(coarse_result(r, :), [], 'all') < 0
         % one preamble detect fail so does not go further
-        if min(coarse_result(r, :)) < 0
+        if min(coarse_result(r, :), [], 'all') < 0
             continue
         end
         
@@ -101,7 +100,8 @@ function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_si
             % path, for the recieved preamble using dual_mic_direct_path 
        
             if user_name == user_id
-                [midx, midx_new] = self_chirp_direct_path(h_abs,h_abs2, tolerance, bias, user_id);
+                [h_peak,midx]=max(h_abs);
+                midx_new = midx;
                 thesholds = [0, 0];
             else
                 [midx, midx_new, thesholds] = dual_mic_direct_path(h_abs,h_abs2, tolerance, bias, 1);
@@ -115,10 +115,9 @@ function [fine_result, coarse_result, rx_signal, rx_signal2] = fine_sync_recv_si
                 plot(h_abs2)
                 scatter(midx, h_abs(midx), 'rx')
                 scatter(midx_new, h_abs2(midx_new), 'ko')
-%                 yline(thesholds(1));
-%                 yline(thesholds(2), '--');
+                yline(thesholds(1));
+                yline(thesholds(2), '--');
                 legend('bottom mic', 'top mic')
-
             end
             fine_result(r, id) = (corr_idx - bias + midx_new);
 

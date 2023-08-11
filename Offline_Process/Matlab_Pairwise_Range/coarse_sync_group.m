@@ -24,30 +24,14 @@ function [coarse_results] = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L,
         end
     end
     
-    begin_idx = 2-lag(1);
-    acor1 = acor(begin_idx:end);
-    locs0 = lag(locs);
     locs = lag(new_locs);
-    negative_index = locs0<=0;
-    locs0(negative_index) =[];
-    locs(negative_index) =[];
     negative_index = locs<=0;
-    locs0(negative_index) =[];
     locs(negative_index) =[];
     
-    %%% plot the cross-correlation figures for
-    figure
-    hold on
-    plot(acor1)
-    scatter(locs0, acor1(locs0), 'rx')
-    scatter(locs, acor1(locs), 'ko')
-
     %% using naiser corr to exclude sparkle noise
-    num_user = group_size - 1;
-    fs = 44100;
-    interval = 0.36*fs; 
-    reply_interval = 0.85 *fs;
-    sig_len = Ns2 + 2000*2;
+    interval = 15876; % interval between the reply of each users 
+    reply_interval = 37000; % interval between the the leader signal and first user signals
+    sig_len = Ns2 + 4000;
         
     coarse_results = [];
     
@@ -167,7 +151,7 @@ function [coarse_results] = coarse_sync_group(rx_signal, train_sig2s, Ns, GI, L,
                 if(num == 1) 
                     title('Cross-correlation'); 
                 end
-%                 xline(results_indexes(num) - begin_indexes(num) )
+                xline(results_indexes(num) - begin_indexes(num) )
                 subplot(group_size, 3, 3*num)
                 plot(Mn)
                 if(num == 1) 

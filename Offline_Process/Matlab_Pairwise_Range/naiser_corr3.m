@@ -21,14 +21,10 @@ function [begin_idx, peak, Mn] = naiser_corr3(signal, Nu, N0, L, PN_seq)
             seg2 = seg((k)*N_both + N0+1: (k+1)*N_both); 
 
             temp_P = bk*sum(seg1.*seg2);
-            
             Rd = Rd + sum((seg2).^2);
-
             Pd = Pd + temp_P;
            
         end
-%         Rd = sumsqr(seg)*Nu/N_both;
-        %Rd = sumsqr(valid_seg);
         corr = Pd/Rd;
         Mn = [Mn, corr];
 
@@ -55,17 +51,7 @@ function [begin_idx, peak, Mn] = naiser_corr3(signal, Nu, N0, L, PN_seq)
     end
 
 
-%     figure(234)
-%     hold off
-%     plot(Mn);
-%     hold on
-%     scatter(1201, Mn(1201), 'rx')
-%     ylim([-1, 1])
-    
-%     xline(right)
-%     xline(left)
-%     xline((right+left)/2)
-    if(peak > 0.15)
+    if(peak > 0.35)
         if(right~=-1 && left~=-1)
             begin_idx = round(0.5*right+0.5*left)*FACTOR;
         elseif((right == -1 && left ~= -1) || (right ~= -1 && left == -1))
