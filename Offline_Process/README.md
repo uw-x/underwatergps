@@ -2,7 +2,44 @@
 This is for the offline processing of the data collected using the Android App.
 
 ## Matlab_Pairwise_Range
-This is the code for Android part to implement our distributed localization protocol. Now the code can support a group maximum of 6 people.
+The pairwise 1D ranging algorithm using dual-mic channel estimation. The Matlab version we use is MATLAB R2021B.
+
+### main.m
+It is the main function to run our pairwise 1D ranging system on the. The estimated 1D ranging matrix will be saved on "./data_example/1/result*.txt". 
+For each device, it should try to compute the arrival index of all signals. The below figures are an example of the received signal in the user1's microphones. 
+<p align="center">
+<img src="recv.png" width="700">
+</p>
+
+### coarse_sync_group.m
+This is the function to do preamble detection and coarse estimation. Specifically, it first applies the cross-correlation on the received signals and then applies the auto-correlation (Naiser correlation) to detect whether the signal is an actual preamble or some spiking noise. Finally, it returns the coarse indexes of signals.
+The result coarse index will be shown in the figure:
+<p align="center">
+<img src="coarse.png" width="700">
+</p>
+
+### fine_sync_recv_single.m
+This function uses the coarse index from **coarse_sync_group** to chunk the signal and apply dual-mic channel estimation of the beginning index of each preamble. Finally, it returns the fine-grained estimation of the indexes of signals. The dual-mic channel estimation results will be saved in the "./Matlab_Pairwise_Range/results". One example is shown as below:
+<p align="center">
+<img src="coarse.png" width="700">
+</p>
+
+### dual_mic_direct_path.m
+The implementation of the dual-mic channel estimation algorithm in **fine_sync_recv_single**.
+
+### naiser_corr3.m
+The implementation of auto-correlation (Naiser correlation) in **coarse_sync_group**.
+### multi_users_FSK3
+It is the folder to save the raw sending signals.
+
+### results
+It is the folder to save the debugging image during the algorithm
 
 ## Python_3D_localization
 
+
+## data_example
+One data sample we collected in a deep harbor (~9-10m depth). The configuration for measurement is shown as below:
+<p align="center">
+<img src="preamble.png" width="500">
+</p>

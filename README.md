@@ -13,7 +13,7 @@ The basic protocol of the devices is the Time-Duplex Division.  After the leader
 ### Preamble design
 The preamble is composed of 4 OFDM symbols modulated with CAZAC code, and followed by a FSK symbol to encode the user ID.
 <p align="center">
-<img src="preamble.png" width="500">
+<img src="preamble.png" width="700">
 </p>
 
 ### Packet drop/Out of leader's range

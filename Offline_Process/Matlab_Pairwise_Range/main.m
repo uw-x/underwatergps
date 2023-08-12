@@ -93,8 +93,6 @@ for i =1:group_size
     end
 end
 DIS_gt
-figure
-plot(long_sig)
 
 for r =1:(group_size)
     USER_ID = group_users(r);
