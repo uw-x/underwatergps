@@ -19,10 +19,11 @@ The result coarse index will be shown in the figure:
 </p>
 
 ### fine_sync_recv_single.m
-This function uses the coarse index from **coarse_sync_group** to chunk the signal and apply dual-mic channel estimation of the beginning index of each preamble. Finally, it returns the fine-grained estimation of the indexes of signals. The dual-mic channel estimation results will be saved in the "./Matlab_Pairwise_Range/results". One example is shown as below:
+This function uses the coarse index from **coarse_sync_group** to chunk the signal and apply dual-mic channel estimation of the beginning index of each preamble. Finally, it returns the fine-grained estimation of the indexes of signals. The dual-mic channel estimation results will be saved in the "./Matlab_Pairwise_Range/results". One example is shown as below. 
 <p align="center">
-<img src="coarse.png" width="700">
+<img src="channel.jpg" width="700">
 </p>
+Each subplot is the channel estimation for each preamble in the received mic. The horizontal lines are the noise level with some additional safe intervals. The red cross is the highest peak and the black circle is the dual-mic selected direct path. 
 
 ### dual_mic_direct_path.m
 The implementation of the dual-mic channel estimation algorithm in **fine_sync_recv_single**.
@@ -41,5 +42,5 @@ It is the folder to save the debugging image during the algorithm
 ## data_example
 One data sample we collected in a deep harbor (~9-10m depth). The configuration for measurement is shown as below:
 <p align="center">
-<img src="preamble.png" width="500">
+<img src="exp.png" width="500">
 </p>
