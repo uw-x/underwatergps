@@ -39,7 +39,7 @@ It is the folder to save the debugging image during the algorithm
 ## Python_3D_localization
 ### loc_depth.py
 This is the main script to infer the 2D positions of the distributed devices based on the estimated pairwise 1D ranging matrix. The gt.txt contains the ground-truth of 3D positions which is measured by the measurement tape on the ground. (Note: the ground-truth depth is also measured, and we used this measured depth to project pairwise 1D ranging matrix to 2D plane, and then apply the SMACOF).
-This will visualize the estimation of and output the 2D localization errors.
+This will visualize the estimation of and output the 2D localization errors. The black cross symbols are the ground-truth and the colored circle is our estimation of 2D topology. 
 <p align="center">
 <img src="2D_topology.png" width="500">
 </p>
