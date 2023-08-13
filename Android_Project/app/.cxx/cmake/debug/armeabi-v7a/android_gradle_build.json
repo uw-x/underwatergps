@@ -1,0 +1,38 @@
+{
+  "buildFiles": [
+    "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "C:/ProgramData/chocolatey/bin/ninja.exe",
+      "-C",
+      "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\.cxx\\cmake\\debug\\armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "ninja.exe",
+    "-C",
+    "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\.cxx\\cmake\\debug\\armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "native-audio-jni::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "armeabi-v7a",
+      "artifactName": "native-audio-jni",
+      "output": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\build\\intermediates\\cmake\\debug\\obj\\armeabi-v7a\\libnative-audio-jni.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "C:\\Users\\Ali\\AppData\\Local\\Android\\Sdk\\ndk\\22.1.7171670\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang.exe",
+      "cppCompilerExecutable": "C:\\Users\\Ali\\AppData\\Local\\Android\\Sdk\\ndk\\22.1.7171670\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    }
+  },
+  "cFileExtensions": [
+    "c"
+  ],
+  "cppFileExtensions": []
+}

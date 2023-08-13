@@ -1,0 +1,3 @@
+D:/ctc/Github/underwatergps/Android_Project/app/.cxx/cmake/debug/x86/CMakeFiles/native-audio-jni.dir
+D:/ctc/Github/underwatergps/Android_Project/app/.cxx/cmake/debug/x86/CMakeFiles/edit_cache.dir
+D:/ctc/Github/underwatergps/Android_Project/app/.cxx/cmake/debug/x86/CMakeFiles/rebuild_cache.dir

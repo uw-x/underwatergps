@@ -1,0 +1,23 @@
+                    Executable : C:\Program Files\CMake\bin\cmake.exe
+arguments : 
+-HD:\ctc\Github\native-audio2\app\src\main\cpp
+-DCMAKE_FIND_ROOT_PATH=D:\ctc\Github\native-audio2\app\.cxx\cmake\debug\prefab\x86_64\prefab
+-DCMAKE_BUILD_TYPE=Debug
+-DCMAKE_TOOLCHAIN_FILE=C:\Users\Ali\AppData\Local\Android\Sdk\ndk\22.1.7171670\build\cmake\android.toolchain.cmake
+-DANDROID_ABI=x86_64
+-DANDROID_NDK=C:\Users\Ali\AppData\Local\Android\Sdk\ndk\22.1.7171670
+-DANDROID_PLATFORM=android-23
+-DCMAKE_ANDROID_ARCH_ABI=x86_64
+-DCMAKE_ANDROID_NDK=C:\Users\Ali\AppData\Local\Android\Sdk\ndk\22.1.7171670
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=D:\ctc\Github\native-audio2\app\build\intermediates\cmake\debug\obj\x86_64
+-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=D:\ctc\Github\native-audio2\app\build\intermediates\cmake\debug\obj\x86_64
+-DCMAKE_SYSTEM_NAME=Android
+-DCMAKE_SYSTEM_VERSION=23
+-BD:\ctc\Github\native-audio2\app\.cxx\cmake\debug\x86_64
+-GNinja
+jvmArgs : 
+
+
+                    Build command args: []
+                    Version: 1

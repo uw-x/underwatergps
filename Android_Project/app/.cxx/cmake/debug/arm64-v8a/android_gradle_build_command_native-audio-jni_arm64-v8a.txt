@@ -1,0 +1,7 @@
+Executable : ninja.exe
+arguments : 
+-C
+D:\ctc\Github\underwatergps\Android_Project\app\.cxx\cmake\debug\arm64-v8a
+native-audio-jni
+jvmArgs : 
+

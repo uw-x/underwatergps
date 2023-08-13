@@ -1,0 +1,20 @@
+Executable : C:\Program Files\CMake\bin\cmake.exe
+arguments : 
+-HD:\ctc\Github\underwatergps\Android_Project\app\src\main\cpp
+-DCMAKE_FIND_ROOT_PATH=D:\ctc\Github\underwatergps\Android_Project\app\.cxx\cmake\debug\prefab\arm64-v8a\prefab
+-DCMAKE_BUILD_TYPE=Debug
+-DCMAKE_TOOLCHAIN_FILE=C:\Users\Ali\AppData\Local\Android\Sdk\ndk\22.1.7171670\build\cmake\android.toolchain.cmake
+-DANDROID_ABI=arm64-v8a
+-DANDROID_NDK=C:\Users\Ali\AppData\Local\Android\Sdk\ndk\22.1.7171670
+-DANDROID_PLATFORM=android-23
+-DCMAKE_ANDROID_ARCH_ABI=arm64-v8a
+-DCMAKE_ANDROID_NDK=C:\Users\Ali\AppData\Local\Android\Sdk\ndk\22.1.7171670
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=D:\ctc\Github\underwatergps\Android_Project\app\build\intermediates\cmake\debug\obj\arm64-v8a
+-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=D:\ctc\Github\underwatergps\Android_Project\app\build\intermediates\cmake\debug\obj\arm64-v8a
+-DCMAKE_SYSTEM_NAME=Android
+-DCMAKE_SYSTEM_VERSION=23
+-BD:\ctc\Github\underwatergps\Android_Project\app\.cxx\cmake\debug\arm64-v8a
+-GNinja
+jvmArgs : 
+

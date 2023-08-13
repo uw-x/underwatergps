@@ -1,0 +1,3 @@
+D:/ctc/Github/native-audio2/app/.cxx/cmake/debug/x86_64/CMakeFiles/native-audio-jni.dir
+D:/ctc/Github/native-audio2/app/.cxx/cmake/debug/x86_64/CMakeFiles/edit_cache.dir
+D:/ctc/Github/native-audio2/app/.cxx/cmake/debug/x86_64/CMakeFiles/rebuild_cache.dir

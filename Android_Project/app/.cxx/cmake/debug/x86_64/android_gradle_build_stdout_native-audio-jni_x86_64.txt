@@ -1,0 +1,80 @@
+ninja: Entering directory `D:\ctc\Github\native-audio2\app\.cxx\cmake\debug\x86_64'
+[1/2] Building C object CMakeFiles/native-audio-jni.dir/native-audio-jni.c.o
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:206:9: warning: unused variable 'maxLineLength' [-Wunused-variable]
+    int maxLineLength = 1023;
+        ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:217:9: warning: unused variable 'maxLineLength' [-Wunused-variable]
+    int maxLineLength = 1023;
+        ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:306:1: warning: type specifier missing, defaults to 'int' [-Wimplicit-int]
+speakerCounter=0;
+^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:812:1: warning: non-void function does not return a value [-Wreturn-type]
+}
+^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:891:9: warning: unused variable 'offset' [-Wunused-variable]
+    int offset=0;
+        ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1470:11: warning: initializing 'char *' with an expression of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+    char* speaker_ts_filename_str = (*env)->GetStringUTFChars(env, speaker_ts_fname, NULL);
+          ^                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1484:11: warning: initializing 'char *' with an expression of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+    char* topfilename = (*env)->GetStringUTFChars(env, ttfilename, NULL);
+          ^             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1485:11: warning: initializing 'char *' with an expression of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+    char* bottomfilename = (*env)->GetStringUTFChars(env, tbfilename, NULL);
+          ^                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1486:11: warning: initializing 'char *' with an expression of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+    char* meta_filename = (*env)->GetStringUTFChars(env, tmeta_filename, NULL);
+          ^               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1487:11: warning: initializing 'char *' with an expression of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+    char* mic_ts_filename_str = (*env)->GetStringUTFChars(env, mic_ts_fname, NULL);
+          ^                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1414:12: warning: unused variable 'data' [-Wunused-variable]
+    short* data = (short*)((*env)->GetShortArrayElements(env, tempData, NULL));
+           ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1399:10: warning: unused variable 'N' [-Wunused-variable]
+    jint N = (*env)->GetArrayLength(env, tempData);
+         ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1598:11: warning: initializing 'char *' with an expression of type 'const char *' discards qualifiers [-Wincompatible-pointer-types-discards-qualifiers]
+    char* filename = (*env)->GetStringUTFChars(env, tfilename, NULL);
+          ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1819:74: warning: format specifies type 'int' but the argument has type 'long' [-Wformat]
+            __android_log_print(ANDROID_LOG_VERBOSE, "debug", "out2 %d", lround(middle));
+                                                                    ~~   ^~~~~~~~~~~~~~
+                                                                    %ld
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1771:11: warning: unused variable 'str' [-Wunused-variable]
+    char* str=getString_d(Mn,len_corr);
+          ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1894:14: warning: unused variable 'pre2' [-Wunused-variable]
+    jdouble* pre2 = (*env)->GetDoubleArrayElements(env,tpre2, NULL);
+             ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1952:9: warning: unused variable 'prevpeakval' [-Wunused-variable]
+    int prevpeakval=0;
+        ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1975:10: warning: unused variable 'out' [-Wunused-variable]
+    int* out = calloc(2,sizeof(int));
+         ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:1978:9: warning: unused variable 'offset' [-Wunused-variable]
+    int offset=0;
+        ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:2131:21: warning: unused variable 'filteredData2' [-Wunused-variable]
+            double* filteredData2=filteredData+filt_offset;
+                    ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:2106:12: warning: unused variable 'time_spent' [-Wunused-variable]
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+           ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:2199:15: warning: unused variable 'nstr' [-Wunused-variable]
+        char *nstr = getString_d(signal2, Nrx);
+              ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:145:22: warning: unused variable 'bqPlayerMuteSolo' [-Wunused-variable]
+static SLMuteSoloItf bqPlayerMuteSolo;
+                     ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:196:15: warning: unused variable 'nextBuffer' [-Wunused-variable]
+static short *nextBuffer;
+              ^
+D:/ctc/Github/native-audio2/app/src/main/cpp/native-audio-jni.c:197:17: warning: unused variable 'nextSize' [-Wunused-variable]
+static unsigned nextSize;
+                ^
+25 warnings generated.
+[2/2] Linking C shared library D:\ctc\Github\native-audio2\app\build\intermediates\cmake\debug\obj\x86_64\libnative-audio-jni.so

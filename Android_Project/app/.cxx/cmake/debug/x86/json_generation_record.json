@@ -1,0 +1,72 @@
+[
+  {
+    "level": "INFO",
+    "message": "Start JSON generation. Platform version: 23 min SDK version: x86",
+    "file": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "debug|x86",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "rebuilding JSON D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\.cxx\\cmake\\debug\\x86\\android_gradle_build.json due to:",
+    "file": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "debug|x86",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "- command changed from previous, will remove stale json folder",
+    "file": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "debug|x86",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "removing stale contents from \u0027D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\.cxx\\cmake\\debug\\x86\u0027",
+    "file": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "debug|x86",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "created folder \u0027D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\.cxx\\cmake\\debug\\x86\u0027",
+    "file": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "debug|x86",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "executing cmake Executable : C:\\Program Files\\CMake\\bin\\cmake.exe\narguments : \n-HD:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\n-DCMAKE_FIND_ROOT_PATH\u003dD:\\ctc\\Github\\underwatergps\\Android_Project\\app\\.cxx\\cmake\\debug\\prefab\\x86\\prefab\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DCMAKE_TOOLCHAIN_FILE\u003dC:\\Users\\Ali\\AppData\\Local\\Android\\Sdk\\ndk\\22.1.7171670\\build\\cmake\\android.toolchain.cmake\n-DANDROID_ABI\u003dx86\n-DANDROID_NDK\u003dC:\\Users\\Ali\\AppData\\Local\\Android\\Sdk\\ndk\\22.1.7171670\n-DANDROID_PLATFORM\u003dandroid-23\n-DCMAKE_ANDROID_ARCH_ABI\u003dx86\n-DCMAKE_ANDROID_NDK\u003dC:\\Users\\Ali\\AppData\\Local\\Android\\Sdk\\ndk\\22.1.7171670\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dD:\\ctc\\Github\\underwatergps\\Android_Project\\app\\build\\intermediates\\cmake\\debug\\obj\\x86\n-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dD:\\ctc\\Github\\underwatergps\\Android_Project\\app\\build\\intermediates\\cmake\\debug\\obj\\x86\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_SYSTEM_VERSION\u003d23\n-BD:\\ctc\\Github\\underwatergps\\Android_Project\\app\\.cxx\\cmake\\debug\\x86\n-GNinja\njvmArgs : \n\n",
+    "file": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "debug|x86",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "Executable : C:\\Program Files\\CMake\\bin\\cmake.exe\narguments : \n-HD:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\n-DCMAKE_FIND_ROOT_PATH\u003dD:\\ctc\\Github\\underwatergps\\Android_Project\\app\\.cxx\\cmake\\debug\\prefab\\x86\\prefab\n-DCMAKE_BUILD_TYPE\u003dDebug\n-DCMAKE_TOOLCHAIN_FILE\u003dC:\\Users\\Ali\\AppData\\Local\\Android\\Sdk\\ndk\\22.1.7171670\\build\\cmake\\android.toolchain.cmake\n-DANDROID_ABI\u003dx86\n-DANDROID_NDK\u003dC:\\Users\\Ali\\AppData\\Local\\Android\\Sdk\\ndk\\22.1.7171670\n-DANDROID_PLATFORM\u003dandroid-23\n-DCMAKE_ANDROID_ARCH_ABI\u003dx86\n-DCMAKE_ANDROID_NDK\u003dC:\\Users\\Ali\\AppData\\Local\\Android\\Sdk\\ndk\\22.1.7171670\n-DCMAKE_EXPORT_COMPILE_COMMANDS\u003dON\n-DCMAKE_LIBRARY_OUTPUT_DIRECTORY\u003dD:\\ctc\\Github\\underwatergps\\Android_Project\\app\\build\\intermediates\\cmake\\debug\\obj\\x86\n-DCMAKE_RUNTIME_OUTPUT_DIRECTORY\u003dD:\\ctc\\Github\\underwatergps\\Android_Project\\app\\build\\intermediates\\cmake\\debug\\obj\\x86\n-DCMAKE_SYSTEM_NAME\u003dAndroid\n-DCMAKE_SYSTEM_VERSION\u003d23\n-BD:\\ctc\\Github\\underwatergps\\Android_Project\\app\\.cxx\\cmake\\debug\\x86\n-GNinja\njvmArgs : \n\n",
+    "file": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "debug|x86",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "done executing cmake",
+    "file": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "debug|x86",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "write command file D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\.cxx\\cmake\\debug\\x86\\build_command.txt",
+    "file": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "debug|x86",
+    "diagnosticCode": "UNKNOWN"
+  },
+  {
+    "level": "INFO",
+    "message": "JSON generation completed without problems",
+    "file": "D:\\ctc\\Github\\underwatergps\\Android_Project\\app\\src\\main\\cpp\\CMakeLists.txt",
+    "tag": "debug|x86",
+    "diagnosticCode": "UNKNOWN"
+  }
+]

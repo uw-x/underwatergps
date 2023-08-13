@@ -1,0 +1,12 @@
+{
+  "ndkVersionFromDsl": "22.1.7171670",
+  "sdkFolder": "C:\\Users\\chent\\AppData\\Local\\Android\\Sdk",
+  "sideBySideNdkFolderNames": [
+    "21.0.6113669",
+    "21.1.6352462",
+    "21.4.7075529",
+    "22.1.7171670",
+    "23.0.7599858",
+    "23.1.7779620"
+  ]
+}

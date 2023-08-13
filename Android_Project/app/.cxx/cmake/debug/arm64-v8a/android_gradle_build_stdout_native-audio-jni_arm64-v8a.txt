@@ -1,0 +1,2 @@
+ninja: Entering directory `D:\ctc\Github\underwatergps\Android_Project\app\.cxx\cmake\debug\arm64-v8a'
+ninja: no work to do.
