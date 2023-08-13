@@ -26,7 +26,7 @@ public class Constants {
     public static int bufferSize,bigBufferSize,bigBufferTimes;
     public static boolean stop=false;
     public static boolean initsleeping=false;
-    static EditText et1,et2,et3,et4,et5,et6,et7,et8,et9,et10,et13,et14,et15,et16; //et11,et12,
+    static EditText et1,et2,et3,et4,et5,et7,et10,et16; //et11,et12,
     public static NestedScrollView sview;
     static int fs=44100;
     static float naiserThresh=0.3f, naiserShoulder=0.8f;
@@ -111,14 +111,8 @@ public class Constants {
         et3.setText(replyDelay+"");
         et4.setText(initSleep+"");
         et5.setText(xcorrthresh+"");
-        et6.setText(minPeakDistance+"");
         et7.setText(fileID+"");
-        et8.setText(naiserThresh+"");
-        et9.setText(naiserShoulder+"");
         et10.setText(user_id+"");
-        et13.setText(pthresh+"");
-        et14.setText(rounds+"");
-        et15.setText(initialDelay+"");
         et16.setText(calibWait+"");
         sw1.setChecked(water);
         sw2.setChecked(reply);
@@ -162,16 +156,8 @@ public class Constants {
         Constants.et3.setEnabled(!Constants.et3.isEnabled());
         Constants.et4.setEnabled(!Constants.et4.isEnabled());
         Constants.et5.setEnabled(!Constants.et5.isEnabled());
-        Constants.et6.setEnabled(!Constants.et6.isEnabled());
         Constants.et7.setEnabled(!Constants.et7.isEnabled());
-        Constants.et8.setEnabled(!Constants.et8.isEnabled());
-        Constants.et9.setEnabled(!Constants.et9.isEnabled());
         Constants.et10.setEnabled(!Constants.et10.isEnabled());
-//        Constants.et11.setEnabled(!Constants.et11.isEnabled());
-//        Constants.et12.setEnabled(!Constants.et12.isEnabled());
-        Constants.et13.setEnabled(!Constants.et13.isEnabled());
-        Constants.et14.setEnabled(!Constants.et14.isEnabled());
-        Constants.et15.setEnabled(!Constants.et15.isEnabled());
         Constants.et16.setEnabled(!Constants.et16.isEnabled());
     }
 
@@ -296,6 +282,5 @@ public class Constants {
                 tv11.setText(finalTxt);
             }
         });
-        Log.e("asdf","load file "+sig.length);
     }
 }

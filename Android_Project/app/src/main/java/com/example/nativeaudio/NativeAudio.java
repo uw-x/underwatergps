@@ -150,16 +150,8 @@ public class NativeAudio extends AppCompatActivity
         Constants.et3 = (EditText)findViewById(R.id.editTextNumberDecimal4);
         Constants.et4 = (EditText)findViewById(R.id.editTextNumber5);
         Constants.et5 = (EditText)findViewById(R.id.editTextNumber2);
-        Constants.et6 = (EditText)findViewById(R.id.editTextNumberDecimal3);
         Constants.et7 = (EditText)findViewById(R.id.etFileNumber);
-        Constants.et8 = (EditText)findViewById(R.id.editTextNumber3);
-        Constants.et9 = (EditText)findViewById(R.id.editTextNumber4);
         Constants.et10 = (EditText)findViewById(R.id.editTextNumber6);
-//        Constants.et11 = (EditText)findViewById(R.id.editTextNumber7);
-//        Constants.et12 = (EditText)findViewById(R.id.editTextNumber8);
-        Constants.et13 = (EditText)findViewById(R.id.editTextNumberDecimal5);
-        Constants.et14 = (EditText)findViewById(R.id.editTextNumber9);
-        Constants.et15 = (EditText)findViewById(R.id.editTextNumber);
         Constants.et16 = (EditText)findViewById(R.id.editTextNumber16);
 
         Constants.tv = (TextView)findViewById(R.id.textView3);
@@ -292,26 +284,6 @@ public class NativeAudio extends AppCompatActivity
             }
         });
 
-        Constants.et6.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(NativeAudio.this).edit();
-                String ss = Constants.et6.getText().toString();
-                if (Utils.isFloat(ss)) {
-                    editor.putFloat("minPeakDistance", Float.parseFloat(ss));
-                    editor.commit();
-                    Constants.minPeakDistance = Float.parseFloat(ss);
-                }
-            }
-        });
 
         Constants.et7.addTextChangedListener(new TextWatcher() {
             @Override
@@ -335,48 +307,6 @@ public class NativeAudio extends AppCompatActivity
             }
         });
 
-        Constants.et8.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(NativeAudio.this).edit();
-                String ss = Constants.et8.getText().toString();
-                if (Utils.isFloat(ss)) {
-                    editor.putFloat("naiserThresh", Float.parseFloat(ss));
-                    editor.commit();
-                    Constants.naiserThresh = Float.parseFloat(ss);
-                }
-            }
-        });
-
-        Constants.et9.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(NativeAudio.this).edit();
-                String ss = Constants.et9.getText().toString();
-                if (Utils.isFloat(ss)) {
-                    editor.putFloat("naiserShoulder", Float.parseFloat(ss));
-                    editor.commit();
-                    Constants.naiserShoulder = Float.parseFloat(ss);
-
-                }
-            }
-        });
 
         Constants.et10.addTextChangedListener(new TextWatcher() {
             @Override
@@ -442,68 +372,8 @@ public class NativeAudio extends AppCompatActivity
 //            }
 //        });
 
-        Constants.et13.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(NativeAudio.this).edit();
-                String ss = Constants.et13.getText().toString();
-                if (Utils.isFloat(ss)) {
-                    editor.putFloat("pthresh", Float.parseFloat(ss));
-                    editor.commit();
-                    Constants.pthresh = Float.parseFloat(ss);
-                }
-            }
-        });
 
-        Constants.et14.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(NativeAudio.this).edit();
-                String ss = Constants.et14.getText().toString();
-                if (Utils.isInteger(ss)) {
-                    editor.putInt("rounds", Integer.parseInt(ss));
-                    editor.commit();
-                    Constants.rounds = Integer.parseInt(ss);
-                }
-            }
-        });
 
-        Constants.et15.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(NativeAudio.this).edit();
-                String ss = Constants.et15.getText().toString();
-                if (Utils.isFloat(ss)) {
-                    editor.putFloat("initialDelay", Float.parseFloat(ss));
-                    editor.commit();
-                    Constants.initialDelay = Float.parseFloat(ss);
-                }
-            }
-        });
 
         Constants.et16.addTextChangedListener(new TextWatcher() {
             @Override
@@ -711,7 +581,6 @@ public class NativeAudio extends AppCompatActivity
     public static native int[] getReplyIndexes();
     public static native int getQueuedSpeakerSegments();
     public static native int getNumChirps();
-    public static native void naiserCorrTest(double[] pre1, double[] pre2, double[] arr, int corr_idx);
 
     /** Load jni .so on initialization */
     static {

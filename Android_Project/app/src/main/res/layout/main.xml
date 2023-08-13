@@ -218,25 +218,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button2" />
 
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="min peak dist"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
 
-        <EditText
-            android:id="@+id/editTextNumberDecimal3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:width="120dp"
-            android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="@+id/editTextNumber2"
-            app:layout_constraintStart_toStartOf="@+id/editTextNumber2"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
 
         <TextView
             android:id="@+id/textView10"
@@ -265,47 +247,8 @@
             android:layout_marginEnd="20dp"
             android:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber9" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumber6" />
 
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="naiser thresh"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumber3"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal3" />
-
-        <EditText
-            android:id="@+id/editTextNumber3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="120dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="@+id/editTextNumberDecimal3"
-            app:layout_constraintStart_toStartOf="@+id/editTextNumberDecimal3"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal3" />
-
-        <EditText
-            android:id="@+id/editTextNumber4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="120dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="@+id/editTextNumber3"
-            app:layout_constraintStart_toStartOf="@+id/editTextNumber3"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber3" />
-
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="naiser shoulder"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumber4"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber3" />
 
         <TextView
             android:id="@+id/textView14"
@@ -314,7 +257,7 @@
             android:text="user_id"
             app:layout_constraintBottom_toBottomOf="@+id/editTextNumber6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber4" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
 
         <EditText
             android:id="@+id/editTextNumber6"
@@ -323,54 +266,13 @@
             android:width="120dp"
             android:ems="10"
             android:inputType="number"
-            app:layout_constraintEnd_toEndOf="@+id/editTextNumber4"
-            app:layout_constraintStart_toStartOf="@+id/editTextNumber4"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber4" />
+            app:layout_constraintEnd_toEndOf="@+id/editTextNumber2"
+            app:layout_constraintStart_toStartOf="@+id/editTextNumber2"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumber2" />
 
 
 
-        <EditText
-            android:id="@+id/editTextNumberDecimal5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:width="120dp"
-            android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber6" />
 
-
-
-        <TextView
-            android:id="@+id/textView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="pthresh"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumberDecimal5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber6" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="rounds"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumber9"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal5"
-            app:layout_constraintVertical_bias="0.461" />
-
-        <EditText
-            android:id="@+id/editTextNumber9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:width="120dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumberDecimal5" />
 
         <Switch
             android:id="@+id/switch4"
@@ -380,14 +282,7 @@
             app:layout_constraintStart_toEndOf="@+id/switch2"
             app:layout_constraintTop_toTopOf="@+id/switch2" />
 
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Initial delay"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextNumber"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber9" />
+
 
         <TextView
             android:id="@+id/textView20"
@@ -396,18 +291,9 @@
             android:text="Calib wait"
             app:layout_constraintBottom_toBottomOf="@+id/editTextNumber16"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumber6" />
 
-        <EditText
-            android:id="@+id/editTextNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:width="120dp"
-            android:ems="10"
-            android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="@+id/editTextNumber9"
-            app:layout_constraintStart_toStartOf="@+id/editTextNumber9"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber9" />
+
 
         <EditText
             android:id="@+id/editTextNumber16"
@@ -416,9 +302,9 @@
             android:width="120dp"
             android:ems="10"
             android:inputType="numberDecimal"
-            app:layout_constraintEnd_toEndOf="@+id/editTextNumber"
-            app:layout_constraintStart_toStartOf="@+id/editTextNumber"
-            app:layout_constraintTop_toBottomOf="@+id/editTextNumber" />
+            app:layout_constraintEnd_toEndOf="@+id/editTextNumber6"
+            app:layout_constraintStart_toStartOf="@+id/editTextNumber6"
+            app:layout_constraintTop_toBottomOf="@+id/editTextNumber6" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
