@@ -5,8 +5,9 @@ import seaborn as sb
 from Weighted_SMACOF import smacof
 import matplotlib
 colors = {'blue':'#1d7fb8', 'gold': '#e1971b', 'green': '#059567', 'brown': '#d9775a', 'purple':'#ca18de', 'red': '#ac0000' }
-
+from itertools import combinations
 # color_lists = ["tab:blue", "tab:orange", "tab:green", "tab:red", "tab:purple", "tab:brown"] 
+import networkx as nx
 
 color_lists = [colors['blue'], colors['red'], colors['green'], colors['brown'], colors['purple'], colors['gold']]
 matplotlib.rc('font', serif='Helvetica') 
@@ -38,29 +39,71 @@ def mds(d, dimensions = 2):
     return (Y[:,0:dimensions], S)
 
 
+def check_connectivity(dis_matrix):
+    G = nx.Graph()
+    edges = []
+    N = dis_matrix.shape[0]
+    for i in range(0, N):
+        for j in range(i+1, N):
+            if dis_matrix[i][j] > 0:
+                edges.append((i, j))
+    G.add_edges_from(edges)
+    min_cut = nx.minimum_node_cut(G)
+    return len(min_cut)
+
+
 def smacof_outlier_detect(dis_measure, outlier = False):
     N = dis_measure.shape[0]
+
+
+    # test outlier detection virtually
+    # dis_measure[0, 1] =  dis_measure[0, 1] + 10
+    # dis_measure[1, 0] =  dis_measure[1, 0] + 10
+    # dis_measure[2, 4] =  dis_measure[2, 4] + 4
+    # dis_measure[4, 2] =  dis_measure[4, 2] + 4
+
     weight_measure = np.ones((N, N))
     pos_pred, score = smacof(dissimilarities=dis_measure, weight_matrix=weight_measure, n_components=2, metric = True,  max_iter = 1000, eps = 1e-4, random_state=0, n_init=8)
     best_score = max([score * (N*(N-1)  - 1)/ (N*(N - 1)) , 0])
-    best_pred = pos_pred   
-    best_score_init = best_score
+    best_pred = pos_pred  
+     
+
     print("smacof score: ", best_score)
 
-    if outlier and best_score > 1:
-        for i in range(N):
-            for j in range(i+1, N):
+    if N <= 7:
+        OUTLIER_NUM = 2
+    else:
+        OUTLIER_NUM = 3
+
+    pair_set = []
+    for i in range(N):
+        for j in range(i+1, N):
+            pair_set.append([i, j])
+    
+    ERR_TH = 1.5
+    if outlier and best_score > ERR_TH:
+        original_pred = best_pred
+        for num in range(1, OUTLIER_NUM+1):
+            combinations_list = list(combinations(pair_set, num)) ## search for all possible drop links
+            best_score_init = best_score
+
+            for drop_link in combinations_list:
                 weight0 = np.copy(weight_measure)
-                weight0[i, j] = 0
-                weight0[j, i] = 0
-                pos_pred0, score0 = smacof(dissimilarities=dis_measure, weight_matrix=weight0, n_components=2, metric = True,  max_iter = 1000, eps = 1e-4, random_state=0, n_init=8)
-                print(i, j, score0, best_score)
-                if score0 < best_score*0.2 and score0 < best_score:
-                    best_score = score0
-                    best_pred = pos_pred0
-        
-        print("best smacof score: ", best_score)
-        return best_pred
+                for i, j in drop_link: ## drop
+                    weight0[i, j] = 0
+                    weight0[j, i] = 0
+                conn = check_connectivity(weight0)
+                if conn >= 3: ### check the uniquely realizable graph
+                    pos_pred0, score0 = smacof(dissimilarities=dis_measure, weight_matrix=weight0, n_components=2, metric = True,  max_iter = 1000, eps = 1e-4, random_state=0, n_init=8)
+                    print(drop_link, score0, best_score_init)
+                    if score0 < best_score:
+                        best_score = score0
+                        best_pred = pos_pred0
+            print("best smacof score: ", best_score, num)
+            if best_score< ERR_TH and best_score < best_score_init*0.1:
+                print("remove outlier: ", num)
+                return best_pred
+        return original_pred
     else:
         return best_pred
 
