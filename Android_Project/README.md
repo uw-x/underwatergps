@@ -8,9 +8,9 @@ UnderwaterGPS APP is an Android application that plays and records sounds with t
 
 # How to use 
 (1) Git clone this repo <br>
-(2) Open Android Studio 2.2+
-(3) Connect your smartphone to computer through USB
-(4) click "run" button
+(2) Open Android Studio 2.2+ <br>
+(3) Connect your smartphone to computer through USB <br>
+(4) click "run" button <br>
 
 The leader side UI setup up example:
 <p align="center">
