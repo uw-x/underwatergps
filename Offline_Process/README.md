@@ -49,10 +49,10 @@ It is the folder to save the debugging image during the algorithm
 ## Python_3D_localization
 
 ### Running Instruction
-(1) Setup Python environment requirement: python 3.8, sklearn, numpy, matplotlib, seaborn, networkx, itertools。
-(2) Go into the "Python_3D_localization" folder  
-(3) Make Sure you have run the matlab code and there should gt.txt and user.txt in the data_example foler  
-(4) Run `python loc_depth.py` and get results  
+(1) Setup Python environment requirement: python 3.8, sklearn, numpy, matplotlib, seaborn, networkx, itertools。<br>
+(2) Go into the "Python_3D_localization" folder  <br>
+(3) Make Sure you have run the matlab code and there should gt.txt and user.txt in the data_example foler  <br>
+(4) Run `python loc_depth.py` and get results  <br>
 
 ### loc_depth.py
 This is the main script to infer the 2D positions of the distributed devices based on the estimated pairwise 1D ranging matrix. The gt.txt contains the ground-truth of 3D positions which is measured by the measurement tape on the ground. (Note: the ground-truth depth is also measured, and we used this measured depth to project pairwise 1D ranging matrix to 2D plane, and then apply the SMACOF).
