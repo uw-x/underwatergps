@@ -5,10 +5,10 @@ This is for the offline processing of the data collected using the Android App.
 The pairwise 1D ranging algorithm using dual-mic channel estimation. The Matlab version we use is MATLAB R2021B.
 
 ### Running Instruction
-(1) Open main.m using Matlab R2021B  
-(2) Make sure the data are in the right folder (by default  
-(3) click the "run" Button in Matlab  
-(4) The the results will be printed and figures will be saved  
+(1) Open main.m using Matlab R2021B <br>
+(2) Make sure the data are in the right folder (by default)  <br>
+(3) click the "run" Button in Matlab  <br>
+(4) The the results will be printed and figures will be saved  <br>
 
 ### main.m
 It is the main function to run our pairwise 1D ranging system on the. The estimated 1D ranging matrix will be saved on "./data_example/1/result*.txt". 
