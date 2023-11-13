@@ -4,6 +4,12 @@ This is for the offline processing of the data collected using the Android App.
 ## Matlab_Pairwise_Range
 The pairwise 1D ranging algorithm using dual-mic channel estimation. The Matlab version we use is MATLAB R2021B.
 
+### Running Instruction
+(1) Open main.m using Matlab R2021B
+(2) Make sure the data are in the right folder (by default
+(3) click the "run" Button in Matlab
+(4) The the results will be printed and figures will be saved
+
 ### main.m
 It is the main function to run our pairwise 1D ranging system on the. The estimated 1D ranging matrix will be saved on "./data_example/1/result*.txt". 
 For each device, it should try to compute the arrival index of all signals. The below figures are an example of the received signal in the user1's microphones. 
@@ -41,6 +47,13 @@ It is the folder to save the raw sending signals.
 It is the folder to save the debugging image during the algorithm
 
 ## Python_3D_localization
+
+### Running Instruction
+(1) Setup Python environment requirement: python 3.8, sklearn, numpy, matplotlib, seaborn, networkx, itertools
+(2) Go into the "Python_3D_localization" folder
+(3) Make Sure you have run the matlab code and there should gt.txt and user.txt in the data_example foler
+(4) Run `python loc_depth.py` and get results
+
 ### loc_depth.py
 This is the main script to infer the 2D positions of the distributed devices based on the estimated pairwise 1D ranging matrix. The gt.txt contains the ground-truth of 3D positions which is measured by the measurement tape on the ground. (Note: the ground-truth depth is also measured, and we used this measured depth to project pairwise 1D ranging matrix to 2D plane, and then apply the SMACOF).
 This will visualize the estimated  2D topology and output the 2D localization errors. The black cross symbols are the ground-truth and the colored circle is our estimation of 2D topology. 
