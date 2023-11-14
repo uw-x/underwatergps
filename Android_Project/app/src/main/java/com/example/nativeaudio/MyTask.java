@@ -153,26 +153,11 @@ public class MyTask extends AsyncTask<Void, Void, Void> {
         String dir = cxt.getExternalFilesDir(null).toString();
         FileOperations.writetofile_str(av,Constants.user_id+"\n"+Constants.reply,Constants.tt+"/"+Constants.tt+"_role.txt");
 
-//        for (int k = 0; k < Constants.rounds; k++) {
-//            Log.e("asdf","START ROUND ");
-
-//            if (k==0) {
                 try {
                     Thread.sleep(Constants.initSleep * 1000);
                 } catch (Exception e) {
                     Log.e("asdf_sleep", e.toString());
                 }
-//            }
-//            else {
-//                if (!Constants.reply) {
-//                    try {
-//                        Thread.sleep(5000);
-//                    } catch (Exception e) {
-//                        Log.e("asdf_sleep", e.toString());
-//                    }
-//                }
-//            }
-
             String topfilename = dir  + "/"+Constants.tt + "/" + Constants.tt + "-" + Constants.fileID + "-top.txt";
             String bottomfilename = dir  + "/"+Constants.tt+ "/" + Constants.tt + "-" + Constants.fileID + "-bottom.txt";
             String meta_filename = dir  + "/"+Constants.tt+ "/" + Constants.tt + "-" + Constants.fileID + "-meta.txt";
