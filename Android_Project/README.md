@@ -55,7 +55,7 @@ Folder "layout" contains the UI configuration of the App; Folder "raw" contains 
 
 (9) `corr2()`: include the stage (b) pipeline for naiser correlation (`naiser_corr()`) and channel estimation (`channel_estimation_freq_multiple()`)<br>
 
-#### setReply
+#### Packet Recv and send
 (0) `Java_com_example_nativeaudio_NativeAudio_calibrate()`: main function and the start of the entire protocol.<br>
 
 (1) `check_user_id()`: checking the user ID of packet using FSK.<br>
