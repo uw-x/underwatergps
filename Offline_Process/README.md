@@ -49,7 +49,7 @@ It is the folder to save the debugging image during the algorithm
 ## Python_3D_localization
 
 ### Running Instruction
-(1) Setup Python environment requirement: python 3.8, sklearn, numpy, matplotlib, seaborn, networkx, itertools。<br>
+(1) Setup Python environment requirement: python 3.8, sklearn, numpy, matplotlib, seaborn, networkx, itertools.<br>
 (2) Go into the "Python_3D_localization" folder  <br>
 (3) Make Sure you have run the matlab code and there should gt.txt and user.txt in the data_example foler  <br>
 (4) Run `python loc_depth.py` and get results  <br>
